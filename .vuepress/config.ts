@@ -26,11 +26,12 @@ export default defineUserConfig({
     authorAvatar: "/头像.jpeg",
     docsRepo: "https://github.com/JAHNAN00/jahnan00.github.io",
     docsBranch: "main",
-    docsDir: "example",
+    docsDir: "docs",
     lastUpdatedText: "",
     // series 为原 sidebar
     colorMode: "auto",
     series: {
+      //对于docs类文档
       "/docs/theme-reco/": [
         {
           text: "module one",
@@ -44,8 +45,8 @@ export default defineUserConfig({
     },
     navbar: [
       { text: "主页", link: "/" },
-      { text: "随记", link: "/posts" },
-      { text: "分类", link: "/categories" },
+      { text: "随记", link: "/posts" },//blog类文档默认编译至posts
+      { text: "分类", link: "/categories/suiji/1.html" },
       { text: "标签", link: "/tags/tag3/1.html" },
       {
         text: "文档",
