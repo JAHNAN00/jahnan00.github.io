@@ -11,8 +11,8 @@ bannerBrand:
   description: 欢迎来到JAHNAN00的博客。
   tagline: 「 为什么登山？因为山就在那里。 」
   buttons:
-    - { text: Guide, link: '/docs/guide/introduce' }
-    - { text: Default Style, link: '/docs/style-default-api/introduce', type: 'plain' }
+    - { text: 介绍, link: '/docs/guide/introduce' }
+    - { text: Github, link: '/docs/style-default-api/introduce', type: 'plain' }
   socialLinks:
     - { icon: 'LogoGithub', link: 'https://github.com/vuepress-reco/vuepress-theme-reco' }
 blog:
