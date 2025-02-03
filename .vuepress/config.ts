@@ -4,15 +4,15 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { webpackBundler } from '@vuepress/bundler-webpack'
 
 export default defineUserConfig({
-  title: "vuepress-theme-reco",
+  title: "JAHNAN00's blog",
   description: "Just playing around",
   bundler: viteBundler(),
   // bundler: webpackBundler(),
   theme: recoTheme({
     logo: "/logo.png",
-    author: "reco_luan",
-    authorAvatar: "/head.png",
-    docsRepo: "https://github.com/vuepress-reco/vuepress-theme-reco-next",
+    author: "JAHNAN00",
+    authorAvatar: "/头像.jpeg",
+    docsRepo: "https://github.com/JAHNAN00/jahnan00.github.io",
     docsBranch: "main",
     docsDir: "example",
     lastUpdatedText: "",
