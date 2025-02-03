@@ -13,8 +13,6 @@ bannerBrand:
   buttons:
     - { text: 介绍, link: '/docs/guide/introduce' }
     - { text: Github, link: '/docs/style-default-api/introduce', type: 'plain' }
-  socialLinks:
-    - { icon: 'LogoGithub', link: 'https://github.com/vuepress-reco/vuepress-theme-reco' }
 blog:
   socialLinks:
     - { icon: 'LogoGithub', link: 'https://github.com/recoluan' }
