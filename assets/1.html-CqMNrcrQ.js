@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as a}from"./app-DOpVhyn-.js";const o={};function r(c,_){return a(),e("div")}const n=t(o,[["render",r],["__file","1.html.vue"]]),s=JSON.parse('{"path":"/tags/C/C__/1.html","title":"","lang":"zh-CN","frontmatter":{"layout":"Categories"},"headers":[],"git":{},"filePathRelative":null}');export{n as comp,s as data};
