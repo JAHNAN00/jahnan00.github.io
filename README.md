@@ -11,11 +11,11 @@ bannerBrand:
   description: 欢迎来到JAHNAN00的博客。
   tagline: 「 为什么登山？因为山就在那里。 」
   buttons:
-    - { text: 介绍, link: '/docs/guide/introduce' }
-    - { text: Github, link: '/docs/style-default-api/introduce', type: 'plain' }
+    - { text: 介绍, link: '/blogs/introduce' }
+    - { text: Github, link: 'https://github.com/JAHNAN00', type: 'plain' }
 blog:
   socialLinks:
-    - { icon: 'LogoGithub', link: 'https://github.com/recoluan' }
+    - { icon: 'LogoGithub', link: 'https://github.com/JAHNAN00' }
 isShowTitleInHome: true
 actionText: About
 actionLink: /views/other/about
