@@ -20,7 +20,7 @@ export const themeConfig: RecoThemeData = {
     authorAvatar: "/head.png",
     docsRepo: "https://github.com/JAHNAN00/jahnan00.github.io",
     docsBranch: "main",
-    docsDir: "docs",//感觉有点问题
+    docsDir: "/blogs",//感觉有点问题
     colorMode: "auto",
     lastUpdated: true,
     categoriesText:"分类",
@@ -29,7 +29,6 @@ export const themeConfig: RecoThemeData = {
 
     // 导航栏
     navbar: [
-        {text:"测试",icon:'IconSun',link:"/"},
         { text: "主页", link: "/" },
         { text: "博客", link: "/posts" },//所有blog类文档默认编译至posts
         { text: "分类", link: "/categories/daohang/1.html" },//按照分类筛选文章
