@@ -22,6 +22,8 @@ export const themeConfig: RecoThemeData = {
     docsBranch: "main",
     docsDir: "docs",//感觉有点问题
     colorMode: "auto",
+    lastUpdated: true,
+    
 
     // 导航栏
     navbar: [

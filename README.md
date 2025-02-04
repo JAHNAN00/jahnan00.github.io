@@ -16,7 +16,13 @@ bannerBrand:
 blog:
   socialLinks:
     - { icon: 'LogoGithub', link: 'https://github.com/JAHNAN00' }
-isShowTitleInHome: true
-actionText: About
-actionLink: /views/other/about
+isShowTitleInHome: true #不知道干啥的
+actionText: About #不知道干啥的
+actionLink: /views/other/about #不知道干啥的
+footer: # 底部模块的配置
+  # record: 域名备案文案
+  # recordLink: 域名备案地址
+  # cyberSecurityRecord: 公安备案文案
+  # cyberSecurityLink: 公安备案地址
+  startYear: 2025
 ---
