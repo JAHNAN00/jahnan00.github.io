@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../node_modules/.pnpm/vuepress-theme-reco@2.0.0-rc.26_@algolia+client-search@5.20.0_@types+node@22.13.0_@vueu_80e849c83c00e1b3689a4f5e3185bc23/node_modules/vuepress-theme-reco/lib/client/components/global/index.js"],
+  "sourcesContent": ["import Tab from './Tab.vue';\nimport Badge from './Badge.vue';\nimport Xicons from './Xicons.vue';\nimport TabItem from './TabItem.vue';\nimport CodeGroup from './CodeGroup.vue';\nimport MagicCard from './MagicCard.vue';\nimport VuePreview from './VuePreview.vue';\nimport CodeGroupItem from './CodeGroupItem.vue';\nexport { Tab, Badge, Xicons, TabItem, CodeGroup, MagicCard, VuePreview, CodeGroupItem };\n"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,OAAO,SAAS;AAChB,OAAO,WAAW;AAClB,OAAO,YAAY;AACnB,OAAO,aAAa;AACpB,OAAO,eAAe;AACtB,OAAO,eAAe;AACtB,OAAO,gBAAgB;AACvB,OAAO,mBAAmB;",
+  "names": []
+}
