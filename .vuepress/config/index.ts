@@ -29,6 +29,7 @@ export const themeConfig: RecoThemeData = {
 
     // 导航栏
     navbar: [
+        {text:"测试",icon:'IconSun',link:"/"},
         { text: "主页", link: "/" },
         { text: "博客", link: "/posts" },//所有blog类文档默认编译至posts
         { text: "分类", link: "/categories/daohang/1.html" },//按照分类筛选文章
