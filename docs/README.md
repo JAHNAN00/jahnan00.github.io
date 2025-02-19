@@ -24,6 +24,7 @@ footer: # 底部模块的配置
 # 待解决的bug
 # vue组件无法正确注册
 # vue组件需放在components根目录下，且docs目录必须设置正确
+#  11111
 ---
 
 <Xicons icon="IconGithub" />
