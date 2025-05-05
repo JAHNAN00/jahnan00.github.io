@@ -13,6 +13,8 @@ export const themeConfig: RecoThemeData = {
     editLinkText: '编辑当前页面',
     notFound: '哇哦，没有发现这个页面！',
     backToHome: '返回首页',
+    categoriesText:"分类",
+    tagsText:"标签",
 
     // 基本信息
     logo: "/logo.png",
@@ -23,8 +25,8 @@ export const themeConfig: RecoThemeData = {
     docsDir: "/docs",//感觉有点问题
     colorMode: "auto",
     lastUpdated: true,
-    categoriesText:"分类",
-    tagsText:"标签",
+    //socialLinks:{},
+    
     
 
     // 导航栏
@@ -37,14 +39,15 @@ export const themeConfig: RecoThemeData = {
         //     //先占着，后续如果有系列教程想写，写在series里
         //     text: "文档",
         //     children: [
-        //         { text: "vuepress-reco", link: "/docs/theme-reco/theme" },
-        //         { text: "vuepress-theme-reco", link: "/blogs/other/guide" },
+        //         { text: "测试", link: "/series/test/template" },
         //     ],
             
         // },
     ],
 
-    // series: {},
+    // series: {
+    //     '/series/test/' :['template',]
+    // },
     // bulletin:{}, //弹窗
 
     // 用于设置评论，待学习
