@@ -8,8 +8,8 @@ modules:
 bannerBrand:
   bgImage: '/bg.svg'
   title: Curiosity Fuels Innovation!
-  description: 欢迎来到JAHNAN00的博客。
-  tagline: 「 为什么登山？因为山就在那里。 」
+  description: 这里是JAHNAN00的个人博客。
+  #tagline: 「 为什么登山？因为山就在那里。 」
   buttons:
     - { text: 介绍, link: '/blogs/introduce' }
     - { text: Github, icon: "IconGithub", link: 'https://github.com/JAHNAN00', type: 'plain' }
