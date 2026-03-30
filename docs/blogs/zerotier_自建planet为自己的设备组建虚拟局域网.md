@@ -2,148 +2,148 @@
 title: zerotier+自建planet为设备组建虚拟局域网
 date: 2025/02/06
 tags:
- - ZeroTier
- - 组网
+ - Web
+ - 物联网
+ - 多设备
 categories:
  - 实用工具
 ---
 
-## ZeroTier 是什么
+## zerotier
 
-ZeroTier 是一个虚拟网络工具，可以把分散在不同网络环境中的设备，连接成一个“像在同一局域网里”的私有网络。
+zerotier是一个基于P2P技术的用于搭建**虚拟局域网**的工具。
 
-例如：你在教室的笔记本，需要访问宿舍里的台式机或家庭服务器。传统做法是内网穿透（如 FRP），而 ZeroTier 更偏向“组网”，让设备之间直接通过虚拟 IP 互联。
+局域网为某个AP下的不同设备分配不同的IP，设备之间可以通过IP互相访问。例如一间房子里有一个路由器，所有连接到该路由器的设备组成了一个局域网。
 
-## 使用前说明
+但是，经常有访问不在同一局域网设备的需求。例如，你带着一台笔记本电脑去教室上课，但是想要访问你放在宿舍的服务器或者台式电脑。这时，一种方法是通过frp等手段搭建**内网穿透**，这种方法将内网的端口映射并暴露在公网中，从而可以使用远程服务，但是安全性稍差，且要求必须有公网IP。
 
-为了避免概念混淆，先统一几个术语：
+虚拟局域网则是通过P2P技术，也就是俗称打洞。它不需要公网IP，且每个设备在虚拟局域网中的IP不变，就好像在同一个局域网中一样。缺点是，打洞能否成功经常需要取决于服务商等因素。
 
-1. FRP 这类内网穿透方案，通常需要一台公网可访问的中转服务器（常见是云服务器），不一定要求家里设备本身有公网 IP。
+## 安装zerotier客户端
 
-2. 自建方案里常见两部分：  
-   - 控制器（controller），负责网络管理和设备授权  
-   - 私有根配置（moon/planet 文件），用于特定网络环境下的节点发现与加速  
-   这两者不是同一个组件。
-
-3. moon/planet 属于进阶配置，并非所有场景都必须使用；常规场景优先保证控制器和设备授权流程可用。
-
-## 安装 ZeroTier 客户端
-
-下载页：<https://www.zerotier.com/download/>
+客户端安装方式如下。
 
 ### Windows
 
-下载 MSI 安装包后安装。  
-默认数据目录：`C:\ProgramData\ZeroTier\One`
+在官网下载页（https://www.zerotier.com/download/）下载msi文件并安装。
 
-### macOS
+安装后，默认配置文件位置：` C:\ProgramData\ZeroTier\One`
 
-下载 PKG 安装包后安装。  
-默认数据目录：`/Library/Application Support/ZeroTier/One`
+### MacOS
 
-### Ubuntu / Debian
+在官网下载页（https://www.zerotier.com/download/）下载MacOS PKG Installer并安装。
+
+安装后，默认配置文件位置：`/Library/Application Support/ZeroTier/One`
+
+### Ubuntu
 
 ```shell
 curl -s https://install.zerotier.com | sudo bash
 ```
 
-默认数据目录：`/var/lib/zerotier-one`
+安装后，配置文件目录在：`/var/lib/zerotier-one`
 
-## 基础用法：加入网络
+## 加入网络
 
-Windows 和 macOS 可用图形界面加入网络：
+Windows和MacOS下，使用图形化界面即可。例：
 
 ![image-20251110023314046](./assets/image-20251110023314046.png)
 
-Linux 命令行：
+Ubuntu（或者说Linux）下，需要使用命令行工具
 
 ```shell
 zerotier-cli join $YOUR_NET_ID
 ```
 
-`$YOUR_NET_ID` 是网络 ID（不是节点 ID）。
+`$YOUR_NET_ID`是你的网络节点ID。
 
-如果你使用官方托管控制器（my.zerotier.com），首次加入后需要在控制台的 `Members` 中将设备设为 `Authorized`，并给设备分配虚拟网段 IP（自动或手动都可）。
+## 配置网络节点
 
-连通性可用以下方式验证：
+如果你计划使用官方服务，请在官网（https://www.zerotier.com）注册账号和节点，并在Member选项卡中管理你的设备，绑定虚拟IP。绑定好并打洞成功后，可以试着能否Ping通。
 
 ```shell
-ping $PEER_ZT_IP
+ping $YOUR_VIRTUAL_IP
 ```
 
-## 自建控制器：使用 ztncui
+如果能ping通说明打洞成功了。
 
-如果你希望自己管理网络控制平面，可以在服务器上部署 ztncui（ZeroTier 控制器 UI）。
+## 自建planet服务器
 
-参考：<https://key-networks.com/ztncui/#installation>
+由于官方服务需要跨境访问，可能带来不好的体验，因此如果有服务器的话更推荐在服务器上自建一个服务端。一个planet服务器需要有一个UI界面，和一个分发给各设备的planet文件。
 
-### 1) 安装 ztncui
+### 在服务器上搭建ztncui
 
-示例（版本号可能变化）：
+主要参考https://key-networks.com/ztncui/#installation。
+
+关键命令如下。
+
+获取deb安装包
 
 ```shell
 curl -O https://s3-us-west-1.amazonaws.com/key-networks/deb/ztncui/1/x86_64/ztncui_0.8.14_amd64.deb
+```
+
+使用apt安装
+
+```shell
 sudo apt install ./ztncui_0.8.14_amd64.deb
 ```
 
-创建 `.env`：
+创建`.env`文件
 
 ```shell
 sudo sh -c "echo ZT_TOKEN=`sudo cat /var/lib/zerotier-one/authtoken.secret` > /opt/key-networks/ztncui/.env"
 ```
 
-追加配置：
+在`.env`文件中添加以下内容
 
 ```shell
 HTTPS_PORT=3443
 NODE_ENV=production
 ```
 
-设置权限：
+更改权限
 
 ```shell
 sudo chmod 400 /opt/key-networks/ztncui/.env
 sudo chown ztncui.ztncui /opt/key-networks/ztncui/.env
 ```
 
-启动并检查：
+启动服务，以及检查服务状态
 
 ```shell
 sudo systemctl restart ztncui
 sudo systemctl status ztncui
 ```
 
-浏览器访问 `https://<SERVER_IP>:3443`。若未配置证书，出现 HTTPS 警告属正常现象。
+服务启动后，就可以通过服务器的3443端口访问ztncui了。由于没有证书，浏览器可能会警告，这是正常的。
 
-### 2) 初始化控制台
+### ztncui的使用
 
-首次登录默认账号通常为：
-
-- 用户名：`admin`
-- 密码：`password`
+进入ztncui后点击右上角login。首次登录，用户名填`admin`，密码填`password`。
 
 ![image-20251110024731078](./assets/image-20251110024731078.png)
 
-建议立即修改默认密码，或新建管理员并停用默认账户。
+登录成功后，建议设置一个强度够高的新密码，因为这个页面是在公网里随时被扫的。创建好新用户后建议把原始的admin账户删除（或者至少改掉默认密码）。
 
-在 `Networks` 页面创建网络，记下 `Network ID`：
+然后在`Networks`一栏，跟随页面提示建立一个新的网络节点，自行分配虚拟网段。配置好后，记下NetworkID，设备加入网络就需要添加这个id。
 
 ![image-20251110025108310](./assets/image-20251110025108310.png)
 
-## 可选进阶：制作并下发 planet 文件（私有根）
+### 制作并分发planet文件
 
-这一步不是所有场景都必须，只有在你明确需要私有根时再做。
+制作planet文件首先需要写好moon配置，获得`moon.json`文件。
 
-先生成 `moon.json`：
+初始化moon配置文件
 
 ```shell
-cd /var/lib/zerotier-one
-zerotier-idtool initmoon identity.public > moon.json
+cd /var/lib/zerotier-one # 进入`zerotier-one`库目录
+zerotier-idtool initmoon identity.public >> moon.json # 生成 json文件
 ```
 
-编辑 `moon.json`，在 `stableEndpoints` 中写入公网 IP 和端口（通常为 `9993`）。
+编辑`moon.json`文件，在`stableEndpoints`下配置自己的公网IP以及端口，端口使用默认的`9993`即可。这样`moon.json`就写好了。
 
-然后生成 `planet`（world）文件：
+在https://github.com/kaaass/ZeroTierOne/releases下载可执行文件`mkmoonworld-x86_64`，然后执行
 
 ```shell
 cp /var/lib/zerotier-one/moon.json ./
@@ -151,45 +151,54 @@ cp /var/lib/zerotier-one/moon.json ./
 mv world.bin planet
 ```
 
-把 `planet` 分发到客户端数据目录（上文各系统目录），并备份旧文件：
+这就制作好planet文件了。
+
+找到各个需要部署的客户端（目录见上），将原有的planet重命名进行备份
 
 ```shell
+# 在各个客户端的对应目录内
 mv planet planet.old
 ```
 
-## 重启客户端并验证
+然后将制作好的planet放到该目录下，代替原有的planet，并重启服务。
 
-### macOS
+### 重启服务并查找自己的服务器节点
+
+mac重启服务：
 
 ```shell
 sudo launchctl unload /Library/LaunchDaemons/com.ZeroTier.one.plist
 sudo launchctl load /Library/LaunchDaemons/com.ZeroTier.one.plist
 ```
 
-### Linux
+linux重启服务：
 
 ```shell
-sudo systemctl restart zerotier-one.service
+systemctl restart zerotier-one.service
 ```
 
-### Windows
+windows重启服务：
 
-在“服务”管理器中重启 ZeroTier 服务。
+去服务页面里面找到对应服务，重启。
 
-检查是否能发现预期对端/根节点：
+重启好以后，测试能否找到服务器
 
 ```shell
 zerotier-cli listpeers
 ```
 
-最后让设备加入目标网络，并在控制器侧授权：
+如果能看到自己的服务器ip就说明搭建成功了。
+
+### 设备加入节点
+
+根据服务器ztncui的节点ID，让自己的设备加入对应的网络。初次加入网络需要在后台ztncui中勾选`Authorized`进行许可。
 
 ```shell
-zerotier-cli join $YOUR_NET_ID
+zerotier-cli join $YOUR_NET_ID #有图形界面的使用图形界面
 ```
 
-如果设备在后台显示在线，且相互 `ping` 通，则组网成功。
+如果设备能在后台显示在线，并且互相能ping通，说明虚拟局域网搭好了。
 
 ![image-20251110030705191](./assets/image-20251110030705191.png)
 
-至此，你就可以通过 ZeroTier 分配的虚拟 IP 进行 SSH、远程桌面或文件传输。
+至此，你的所有设备像是被加入了一个局域网，通过固定ip即可相互访问，也可以ssh或者远程桌面等。
