@@ -1,6 +1,6 @@
 ---
 title: zerotier+自建planet为设备组建虚拟局域网
-date: 2025/02/06
+date: 2025-02-06 10:00:00
 tags:
  - Web
  - 物联网
