@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "robot-inspection-platform",
+    "title": "机器人巡检平台",
+    "year": "2026",
+    "status": "开发中",
+    "cover": "/robot-inspection-cover.svg",
+    "summary": "面向复杂环境的机器人巡检系统，包含任务编排、数据采集和可视化监控。",
+    "techStack": ["Vue", "WebSocket", "Node.js", "ROS"],
+    "highlights": [
+      "实时任务状态面板",
+      "设备健康指标可视化",
+      "支持后续接入 3D 模型动画展示"
+    ],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "sections": [
+      {
+        "title": "项目背景",
+        "content": "这里填写项目背景和业务问题。"
+      },
+      {
+        "title": "技术方案",
+        "content": "这里填写架构、协议、关键模块设计。"
+      },
+      {
+        "title": "后续计划",
+        "content": "这里填写后续动画/3D 模型展示的拓展计划。"
+      }
+    ]
+  },
+  {
+    "slug": "local-network-suite",
+    "title": "跨设备虚拟局域网工具集",
+    "year": "2025",
+    "status": "已上线",
+    "cover": "/network-suite-cover.svg",
+    "summary": "基于自建网络节点的跨设备连接方案，解决远程访问与协作问题。",
+    "techStack": ["Linux", "ZeroTier", "Shell", "Nginx"],
+    "highlights": ["自建节点部署", "跨平台客户端接入", "稳定性监控"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "sections": [
+      {
+        "title": "项目成果",
+        "content": "这里填写项目成果、性能和落地效果。"
+      }
+    ]
+  },
+  {
+    "slug": "learning-notes-engine",
+    "title": "技术笔记知识整理系统",
+    "year": "2026",
+    "status": "规划中",
+    "cover": "/notes-engine-cover.svg",
+    "summary": "把零散技术笔记结构化为可检索、可关联、可追踪的知识库。",
+    "techStack": ["Vue", "TypeScript", "全文检索"],
+    "highlights": ["卡片化整理", "标签与专题聚合", "增量更新"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "sections": [
+      {
+        "title": "说明",
+        "content": "这里填写该项目的细化规划和开发里程碑。"
+      }
+    ]
+  }
+]
