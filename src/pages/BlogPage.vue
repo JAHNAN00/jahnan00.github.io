@@ -19,53 +19,61 @@
   </section>
 
   <section class="panel filter-panel filter-panel-soft">
-    <div class="filter-block">
-      <p class="filter-title">标签</p>
-      <div class="soft-chip-list">
-        <button
-          class="soft-chip"
-          :class="{ active: !activeTag }"
-          type="button"
-          @click="activeTag = ''"
-        >
-          全部
-        </button>
-        <button
-          v-for="tag in tagOptions"
-          :key="tag"
-          class="soft-chip"
-          :class="{ active: activeTag === tag }"
-          type="button"
-          @click="activeTag = tag"
-        >
-          {{ tag }}
-        </button>
-      </div>
-    </div>
+    <details class="collapsible-filter-bar">
+      <summary>
+        <span class="filter-bar-main">按标签和分类筛选</span>
+      </summary>
 
-    <div class="filter-block">
-      <p class="filter-title">分类</p>
-      <div class="soft-chip-list">
-        <button
-          class="soft-chip"
-          :class="{ active: !activeCategory }"
-          type="button"
-          @click="activeCategory = ''"
-        >
-          全部
-        </button>
-        <button
-          v-for="category in categoryOptions"
-          :key="category"
-          class="soft-chip"
-          :class="{ active: activeCategory === category }"
-          type="button"
-          @click="activeCategory = category"
-        >
-          {{ category }}
-        </button>
+      <div class="filter-expanded-content">
+        <div class="filter-block">
+          <p class="filter-title">标签</p>
+          <div class="soft-chip-list">
+            <button
+              class="soft-chip"
+              :class="{ active: !activeTag }"
+              type="button"
+              @click="activeTag = ''"
+            >
+              全部
+            </button>
+            <button
+              v-for="tag in tagOptions"
+              :key="tag"
+              class="soft-chip"
+              :class="{ active: activeTag === tag }"
+              type="button"
+              @click="activeTag = tag"
+            >
+              {{ tag }}
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <p class="filter-title">分类</p>
+          <div class="soft-chip-list">
+            <button
+              class="soft-chip"
+              :class="{ active: !activeCategory }"
+              type="button"
+              @click="activeCategory = ''"
+            >
+              全部
+            </button>
+            <button
+              v-for="category in categoryOptions"
+              :key="category"
+              class="soft-chip"
+              :class="{ active: activeCategory === category }"
+              type="button"
+              @click="activeCategory = category"
+            >
+              {{ category }}
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </details>
   </section>
 
   <section class="blog-list">
