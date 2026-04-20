@@ -1,27 +1,39 @@
 <template>
   <section class="home-hero">
     <article class="hero-main panel">
-      <p class="eyebrow">PERSONAL PORTAL</p>
-      <h1>{{ profile.nickname }}</h1>
-      <p class="hero-title">{{ profile.title }}</p>
-      <p class="hero-summary">{{ profile.summary }}</p>
-      <div class="hero-actions">
-        <RouterLink class="card-button" to="/works">查看作品</RouterLink>
-        <RouterLink class="card-button" to="/blog">阅读博客</RouterLink>
+      <div class="hero-main-top">
+        <img :src="profile.avatar" alt="站点头像" class="hero-avatar" />
+        <div>
+          <p class="eyebrow">PERSONAL PORTAL</p>
+          <h1>{{ profile.nickname }}</h1>
+          <p class="hero-title">{{ profile.title }}</p>
+          <p class="hero-summary">{{ profile.summary }}</p>
+          <div class="hero-actions">
+            <RouterLink class="card-button" to="/works">查看作品</RouterLink>
+            <RouterLink class="card-button" to="/blog">阅读博客</RouterLink>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-fact-list">
+        <div v-for="fact in profile.facts" :key="fact.label" class="hero-fact-item">
+          <span>{{ fact.label }}</span>
+          <strong>{{ fact.value }}</strong>
+        </div>
       </div>
     </article>
 
     <aside class="hero-side">
       <section class="panel stat-card stat-card-accent">
         <p class="stat-label">当前方向</p>
-        <strong>综合个人门户重构</strong>
-        <span>主页、作品、博客三位一体</span>
+        <strong>机器人与嵌入式系统</strong>
+        <span>主要在做电控、机构和一些相关开发工作</span>
       </section>
 
       <section class="panel stat-card">
-        <p class="stat-label">站点气质</p>
-        <strong>简约 / 工程感 / 可扩展</strong>
-        <span>预留作品动画与 3D 展示空间</span>
+        <p class="stat-label">近期关键词</p>
+        <strong>自动化测试 / 竞赛项目 / 技术沉淀</strong>
+        <span>把项目经历、实习见闻和博客记录整理在同一个站点里</span>
       </section>
     </aside>
   </section>
@@ -30,10 +42,10 @@
     <section class="panel intro-card home-large-card">
       <h2>关于我</h2>
       <p>
-        我希望这个站点不仅是博客，也是一张可持续演进的个人名片：能展示正在做的项目，能沉淀技术文章，也能体现长期兴趣与风格。
+        目前处在硕士阶段，平时主要接触机器人、嵌入式开发和自动化测试相关内容，也会把做过的项目和学习记录慢慢整理下来。
       </p>
       <p>
-        这里后续可以继续补充更具体的个人经历、方向选择、代表项目与个人表达。
+        这个站点主要用来集中展示项目、竞赛经历、技术博客和阶段性总结，既方便整理，也方便了解最近在做什么。
       </p>
     </section>
 
@@ -52,18 +64,9 @@
     </section>
 
     <section class="panel home-timeline">
-      <h2>这个网站会放什么</h2>
-      <div class="timeline-item">
-        <strong>首页</strong>
-        <span>个人介绍、技术标签、风格化展示</span>
-      </div>
-      <div class="timeline-item">
-        <strong>作品</strong>
-        <span>卡片化项目集合，支持独立详情与后续动画扩展</span>
-      </div>
-      <div class="timeline-item">
-        <strong>博客</strong>
-        <span>保留持续输出与按标签、分类整理的内容能力</span>
+      <h2>学习阶段</h2>
+      <div v-for="item in profile.education" :key="item" class="timeline-item">
+        <span>{{ item }}</span>
       </div>
     </section>
 
@@ -79,6 +82,20 @@
           <span>{{ profile.contacts.email }}</span>
         </li>
       </ul>
+    </section>
+
+    <section class="panel home-large-card">
+      <h2>经历速览</h2>
+      <div class="timeline-item" v-for="item in profile.experience" :key="item">
+        <span>{{ item }}</span>
+      </div>
+    </section>
+
+    <section class="panel home-large-card">
+      <h2>竞赛与获奖</h2>
+      <div class="chip-list">
+        <span v-for="item in profile.achievements" :key="item" class="chip">{{ item }}</span>
+      </div>
     </section>
   </section>
 </template>

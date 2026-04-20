@@ -1,16 +1,16 @@
 [
   {
-    "slug": "robot-inspection-platform",
-    "title": "机器人巡检平台",
-    "year": "2026",
-    "status": "开发中",
+    "slug": "robomaster-control-framework",
+    "title": "RoboMaster 机器人电控框架与机构设计",
+    "year": "2024 - 2026",
+    "status": "持续迭代",
     "cover": "/robot-inspection-cover.svg",
-    "summary": "面向复杂环境的机器人巡检系统，包含任务编排、数据采集和可视化监控。",
-    "techStack": ["Vue", "WebSocket", "Node.js", "ROS"],
+    "summary": "围绕 RoboMaster 机器人项目进行电控框架和关键机构设计，尽量兼顾可维护性和团队协作开发需求。",
+    "techStack": ["C++", "STM32H723", "嵌入式架构", "Solidworks", "机器人电控"],
     "highlights": [
-      "实时任务状态面板",
-      "设备健康指标可视化",
-      "支持后续接入 3D 模型动画展示"
+      "搭建 driver、module、application 三层架构",
+      "通过 RAII 方式管理底层资源与模块生命周期",
+      "兼顾云台、拨弹机构等机械设计与控制接口协同"
     ],
     "links": {
       "demo": "",
@@ -19,55 +19,75 @@
     "sections": [
       {
         "title": "项目背景",
-        "content": "这里填写项目背景和业务问题。"
+        "content": "该项目服务于星云 EGA 机器人战队备赛，需要在有限周期内完成多台机器人的机械搭建、电控开发与后续协作。"
       },
       {
-        "title": "技术方案",
-        "content": "这里填写架构、协议、关键模块设计。"
+        "title": "负责内容",
+        "content": "负责 2025 赛季步兵、哨兵机器人搭建，以及 2026 赛季轮腿英雄机器人的云台和拨弹机构设计，同时基于 C++ 和 STM32H723 开发板搭建统一电控框架。"
       },
       {
-        "title": "后续计划",
-        "content": "这里填写后续动画/3D 模型展示的拓展计划。"
+        "title": "技术亮点",
+        "content": "框架采用面向对象风格拆分底层驱动、功能模块和业务应用层，尽量减少耦合并方便团队继续维护；资源管理部分参考 RAII 思路降低初始化和释放错误。"
+      },
+      {
+        "title": "阶段成果",
+        "content": "这套框架后续继续用于团队内部开发，也支撑了相关机器人参加高校联盟赛。"
       }
     ]
   },
   {
-    "slug": "local-network-suite",
-    "title": "跨设备虚拟局域网工具集",
-    "year": "2025",
-    "status": "已上线",
-    "cover": "/network-suite-cover.svg",
-    "summary": "基于自建网络节点的跨设备连接方案，解决远程访问与协作问题。",
-    "techStack": ["Linux", "ZeroTier", "Shell", "Nginx"],
-    "highlights": ["自建节点部署", "跨平台客户端接入", "稳定性监控"],
+    "slug": "smart-logistics-robot",
+    "title": "智能物流搬运机器人",
+    "year": "2023",
+    "status": "上海市二等奖",
+    "cover": "/notes-engine-cover.svg",
+    "summary": "面向工程实践与创新能力竞赛的搬运机器人项目，完成识别、路径规划、抓取与全向移动的一体化实现。",
+    "techStack": ["Python", "Linux 开发板", "ESP32", "二维码识别", "麦克纳姆轮"],
+    "highlights": ["闭环全向移动底盘", "二维码顺序识别与搬运", "舵机、步进电机和丝杆协同抓取"],
     "links": {
       "demo": "",
       "repo": ""
     },
     "sections": [
+      {
+        "title": "项目背景",
+        "content": "项目模拟企业制造过程，要求机器人在指定赛道中按二维码编码顺序搬运不同颜色物料，考验识别、运动和抓取的整体协同能力。"
+      },
+      {
+        "title": "系统设计",
+        "content": "机器人使用带编码器的直流电机和麦克纳姆轮实现闭环全向移动，抓取部分通过舵机、步进电机和丝杆完成上下运动；上位感知由 USB 摄像头、Linux 开发板和 ESP32 共同完成。"
+      },
       {
         "title": "项目成果",
-        "content": "这里填写项目成果、性能和落地效果。"
+        "content": "项目获得 2023 年全国大学生工程实践与创新能力竞赛上海市二等奖，也系统练习了机器人底盘、抓取机构与控制通信的协同开发。"
       }
     ]
   },
   {
-    "slug": "learning-notes-engine",
-    "title": "技术笔记知识整理系统",
-    "year": "2026",
-    "status": "规划中",
-    "cover": "/notes-engine-cover.svg",
-    "summary": "把零散技术笔记结构化为可检索、可关联、可追踪的知识库。",
-    "techStack": ["Vue", "TypeScript", "全文检索"],
-    "highlights": ["卡片化整理", "标签与专题聚合", "增量更新"],
+    "slug": "maze-tracking-smart-car",
+    "title": "迷宫识别循迹智能车",
+    "year": "2023",
+    "status": "全国三等奖",
+    "cover": "/robot-inspection-cover.svg",
+    "summary": "通过 USB 摄像头识别纸质地图，在 Linux 开发板上完成图像处理和路径规划，并指挥小车在迷宫场景中自主寻宝。",
+    "techStack": ["Python", "香橙派", "ESP32", "UART", "ToF 传感器"],
+    "highlights": ["纸质地图识别与路径规划", "上位机到下位机 UART 通信", "小车驱动与自动泊车辅助检测"],
     "links": {
       "demo": "",
       "repo": ""
     },
     "sections": [
       {
-        "title": "说明",
-        "content": "这里填写该项目的细化规划和开发里程碑。"
+        "title": "项目背景",
+        "content": "该项目是全国大学生光电设计竞赛参赛作品，需要智能车根据摄像头识别的迷宫地图，自主寻找指定宝藏。"
+      },
+      {
+        "title": "实现方式",
+        "content": "在香橙派 Linux 开发板中使用 Python 程序完成图像处理和路径规划，再通过 UART 与采用 ESP32 的下位机通信，控制直流电机驱动车辆运动，并使用 ToF 传感器进行辅助检测。"
+      },
+      {
+        "title": "项目成果",
+        "content": "项目获得 2023 年全国大学生光电设计竞赛全国三等奖，并在东部赛区获得一等奖，进一步锻炼了图像处理与嵌入式控制结合能力。"
       }
     ]
   }

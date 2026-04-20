@@ -3,7 +3,7 @@
     <p class="eyebrow">WORKS</p>
     <div class="page-head-inline">
       <h1>作品集</h1>
-      <p>用卡片展示具有一定规模的项目。点击后进入独立详情页，后续可扩展动画/3D 模型。</p>
+      <p>这里整理了近阶段做过的项目，涵盖背景、实现方式、关键成果与当前状态。</p>
     </div>
   </section>
 

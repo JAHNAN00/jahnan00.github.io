@@ -1,11 +1,41 @@
 {
   "nickname": "JAHNAN00",
-  "title": "全栈开发学习者 / 技术实践者",
-  "summary": "这里是我的个人门户，记录我做过的项目、持续更新的技术博客以及一些有趣的探索。",
-  "techStack": ["Vue", "Vite", "C++", "Python", "Linux", "Docker"],
-  "interests": ["机器人", "网络与系统", "工程化", "开源协作"],
+  "avatar": "/site-avatar.jpg",
+  "title": "硕士在读 / 机器人与嵌入式方向",
+  "summary": "主要在做机器人、电控与嵌入式相关项目，也会用 Web 技术整理作品、博客和阶段性记录。",
+  "techStack": ["C++", "Python", "STM32", "ESP32", "Linux", "Vue", "JavaScript", "Qt", "ROS", "Solidworks"],
+  "interests": ["机器人系统", "嵌入式开发", "自动化测试", "计算机视觉", "工程教育", "Web 前端"],
+  "facts": [
+    {
+      "label": "教育背景",
+      "value": "硕士在读"
+    },
+    {
+      "label": "实践方向",
+      "value": "机器人、电控与自动化测试"
+    },
+    {
+      "label": "近期经历",
+      "value": "Apple R&D 实习经历"
+    }
+  ],
+  "education": [
+    "硕士阶段（2024.09 - 2027.06）",
+    "本科阶段（2020.09 - 2024.06）"
+  ],
+  "experience": [
+    "Apple R&D 实习：参与硬件相关测试与工具支持工作",
+    "星云 EGA 机器人战队：参与机器人项目开发与团队工作",
+    "电子创客社团：负责社团组织、培训和项目活动"
+  ],
+  "achievements": [
+    "RoboMaster 高校联盟赛上海站八强（一等奖）",
+    "全国大学生光电设计竞赛全国三等奖（东部赛区一等奖）",
+    "TI 杯上海市大学生电子设计竞赛一等奖",
+    "校级奖学金与企业专项奖学金"
+  ],
   "contacts": {
     "github": "https://github.com/JAHNAN00",
-    "email": "your-email@example.com"
+    "email": "zhangan2020@outlook.com"
   }
 }

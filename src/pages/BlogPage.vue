@@ -3,7 +3,7 @@
     <p class="eyebrow">BLOG</p>
     <div class="page-head-inline">
       <h1>博客</h1>
-      <p>保留原有按标签/分类整理的思路，并提供快速筛选。</p>
+      <p>收录技术文章、学习笔记与项目实践，支持按标签和分类快速检索。</p>
     </div>
   </section>
 

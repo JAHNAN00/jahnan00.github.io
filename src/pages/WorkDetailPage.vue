@@ -10,8 +10,8 @@
   </section>
 
   <section v-if="work" class="panel animation-slot">
-    <h2>动画/3D 扩展位</h2>
-    <p>这里预留后续独立动画或三维模型交互模块的挂载区域。</p>
+    <h2>项目展示</h2>
+    <p>后续会在这里补充演示画面、流程示意或更直观的项目展示内容。</p>
   </section>
 
   <section v-if="work" class="panel">
@@ -35,12 +35,12 @@
       <li>
         演示地址：
         <span v-if="work.links.demo">{{ work.links.demo }}</span>
-        <span v-else>（占位）</span>
+        <span v-else>暂未公开</span>
       </li>
       <li>
         仓库地址：
         <span v-if="work.links.repo">{{ work.links.repo }}</span>
-        <span v-else>（占位）</span>
+        <span v-else>暂未公开</span>
       </li>
     </ul>
   </section>

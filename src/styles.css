@@ -74,9 +74,20 @@ a {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-decoration: none;
+}
+
+.brand-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid color-mix(in oklab, var(--accent) 20%, var(--line));
 }
 
 .main-nav {
@@ -205,10 +216,51 @@ a {
   min-height: 320px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   background:
     radial-gradient(circle at top left, color-mix(in oklab, var(--accent) 22%, transparent), transparent 42%),
     linear-gradient(135deg, color-mix(in oklab, var(--bg-strong) 86%, transparent), var(--bg-strong));
+}
+
+.hero-main-top {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.hero-avatar {
+  width: 132px;
+  height: 132px;
+  border-radius: 24px;
+  object-fit: cover;
+  border: 1px solid color-mix(in oklab, var(--accent) 18%, var(--line));
+  box-shadow: 0 18px 30px rgba(17, 28, 44, 0.14);
+}
+
+.hero-fact-list {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-fact-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: color-mix(in oklab, var(--bg-strong) 88%, transparent);
+  display: grid;
+  gap: 6px;
+}
+
+.hero-fact-item span {
+  color: var(--text-soft);
+  font-size: 12px;
+}
+
+.hero-fact-item strong {
+  font-size: 14px;
 }
 
 .hero-side {
@@ -354,6 +406,9 @@ p {
 }
 
 .work-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow: hidden;
   padding: 0;
 }
@@ -366,6 +421,7 @@ p {
 }
 
 .work-content {
+  flex: 1;
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -761,6 +817,21 @@ input {
 
   .home-large-card {
     grid-column: span 1;
+  }
+
+  .hero-fact-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-main-top {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-avatar {
+    width: 108px;
+    height: 108px;
   }
 }
 
