@@ -9,40 +9,35 @@
     </div>
   </section>
 
-  <section v-if="work" class="panel animation-slot">
-    <h2>项目展示</h2>
-    <p>后续会在这里补充演示画面、流程示意或更直观的项目展示内容。</p>
+  <component
+    :is="customDetailComponent"
+    v-if="work && customDetailComponent"
+    :work="work"
+  />
+
+  <section v-else-if="work && rendered" class="panel article-page">
+    <div class="markdown-body" v-html="rendered"></div>
   </section>
 
-  <section v-if="work" class="panel">
-    <h2>项目亮点</h2>
-    <ul class="list">
-      <li v-for="point in work.highlights" :key="point">{{ point }}</li>
-    </ul>
-  </section>
-
-  <section v-if="work" class="panel">
-    <h2>详细说明</h2>
-    <article v-for="section in work.sections" :key="section.title" class="article-block">
-      <h3>{{ section.title }}</h3>
-      <p>{{ section.content }}</p>
-    </article>
-  </section>
-
-  <section v-if="work" class="panel">
+  <section v-if="work && hasLinks" class="panel">
     <h2>项目链接</h2>
     <ul class="list">
-      <li>
+      <li v-if="work.links.demo">
         演示地址：
-        <span v-if="work.links.demo">{{ work.links.demo }}</span>
-        <span v-else>暂未公开</span>
+        <a :href="work.links.demo" target="_blank" rel="noreferrer">{{ work.links.demo }}</a>
       </li>
-      <li>
+      <li v-if="work.links.repo">
         仓库地址：
-        <span v-if="work.links.repo">{{ work.links.repo }}</span>
-        <span v-else>暂未公开</span>
+        <a :href="work.links.repo" target="_blank" rel="noreferrer">{{ work.links.repo }}</a>
       </li>
     </ul>
+  </section>
+
+  <section v-if="work && !customDetailComponent && !rendered" class="panel">
+    <h2>详情待补充</h2>
+    <p>
+      请在 <code>src/content/works/{{ work.slug }}.md</code> 中补充作品正文，或为该作品配置自定义详情组件。
+    </p>
   </section>
 
   <FloatingBackButton v-if="work" to="/works" label="返回作品列表" />
@@ -54,12 +49,43 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, defineAsyncComponent, shallowRef, watchEffect } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import FloatingBackButton from "../components/FloatingBackButton.vue";
-import { getWorkBySlug } from "../lib/works";
+import { resolveWorkAssetPath } from "../lib/contentAssets";
+import { renderMarkdown } from "../lib/markdown";
+import {
+  getWorkBySlug,
+  getWorkCustomDetailLoader,
+  getWorkMarkdownBySlug,
+} from "../lib/works";
 
 const route = useRoute();
 
 const work = computed(() => getWorkBySlug(decodeURIComponent(String(route.params.slug || ""))));
+
+const rendered = computed(() => {
+  if (!work.value) {
+    return "";
+  }
+
+  const markdown = getWorkMarkdownBySlug(work.value.slug);
+  return markdown ? renderMarkdown(markdown, resolveWorkAssetPath) : "";
+});
+
+const hasLinks = computed(() => Boolean(work.value?.links?.demo || work.value?.links?.repo));
+
+const customDetailComponent = shallowRef(null);
+
+watchEffect(() => {
+  const componentName = work.value?.detailComponent;
+
+  if (!componentName) {
+    customDetailComponent.value = null;
+    return;
+  }
+
+  const loader = getWorkCustomDetailLoader(componentName);
+  customDetailComponent.value = loader ? defineAsyncComponent(loader) : null;
+});
 </script>

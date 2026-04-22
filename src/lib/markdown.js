@@ -6,4 +6,11 @@ const md = new MarkdownIt({
   breaks: true,
 });
 
-export const renderMarkdown = (content) => md.render(content || "");
+const replaceAssetUrls = (html, resolveAssetPath) =>
+  html.replace(/(src|href)="\/([^"]+)"/g, (_, attr, assetName) => {
+    const resolved = resolveAssetPath(assetName);
+    return `${attr}="${resolved}"`;
+  });
+
+export const renderMarkdown = (content, resolveAssetPath = (value) => value) =>
+  replaceAssetUrls(md.render(content || ""), resolveAssetPath);

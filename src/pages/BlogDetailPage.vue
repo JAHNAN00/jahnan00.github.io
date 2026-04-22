@@ -25,11 +25,14 @@
 import { computed } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import FloatingBackButton from "../components/FloatingBackButton.vue";
+import { resolveBlogAssetPath } from "../lib/contentAssets";
 import { getPostBySlug } from "../lib/blog";
 import { renderMarkdown } from "../lib/markdown";
 
 const route = useRoute();
 
 const post = computed(() => getPostBySlug(decodeURIComponent(String(route.params.slug || ""))));
-const rendered = computed(() => (post.value ? renderMarkdown(post.value.content) : ""));
+const rendered = computed(() =>
+  post.value ? renderMarkdown(post.value.content, resolveBlogAssetPath) : "",
+);
 </script>

@@ -3,9 +3,4 @@ import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [vue()],
-  publicDir: "docs/blogs/assets",
-  build: {
-    outDir: "docs/.vuepress/dist",
-    emptyOutDir: true,
-  },
 });
