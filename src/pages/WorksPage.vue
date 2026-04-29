@@ -12,7 +12,7 @@
       <img :src="work.cover" :alt="work.title" class="work-cover" loading="lazy" />
       <div class="work-content">
         <p class="meta">{{ work.year }} · {{ work.status }}</p>
-        <h2>{{ work.title }}</h2>
+        <h2>{{ work.title }} <span>{{ work.status }}</span></h2>
         <p>{{ work.summary }}</p>
         <div class="chip-list compact">
           <span v-for="tech in work.techStack" :key="`${work.slug}-${tech}`" class="chip">{{ tech }}</span>

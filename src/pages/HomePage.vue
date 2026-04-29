@@ -1,106 +1,94 @@
 <template>
   <section class="home-hero">
-    <article class="hero-main panel">
-      <div class="hero-main-top">
-        <img :src="profile.avatar" alt="站点头像" class="hero-avatar" />
-        <div>
-          <p class="eyebrow">PERSONAL PORTAL</p>
-          <h1>{{ profile.nickname }}</h1>
-          <p class="hero-title">{{ profile.title }}</p>
-          <p class="hero-summary">{{ profile.summary }}</p>
-          <div class="hero-actions">
-            <RouterLink class="card-button" to="/works">查看作品</RouterLink>
-            <RouterLink class="card-button" to="/blog">阅读博客</RouterLink>
-          </div>
-        </div>
+    <div class="hero-copy">
+      <p class="eyebrow">PERSONAL PORTAL</p>
+      <h1>
+        <span>探索 · 学习 · 成长</span>
+        <span class="hero-title-line">做有价值的事</span>
+      </h1>
+      <p>{{ profile.summary }}</p>
+      <span class="hero-rule"></span>
+      <div class="hero-actions">
+        <RouterLink class="button-dark" to="/works">了解更多 <span>→</span></RouterLink>
       </div>
-
-      <div class="hero-fact-list">
-        <div v-for="fact in profile.facts" :key="fact.label" class="hero-fact-item">
-          <span>{{ fact.label }}</span>
-          <strong>{{ fact.value }}</strong>
-        </div>
-      </div>
-    </article>
-
-    <aside class="hero-side">
-      <section class="panel stat-card stat-card-accent">
-        <p class="stat-label">当前方向</p>
-        <strong>机器人与嵌入式系统</strong>
-        <span>主要在做电控、机构和一些相关开发工作</span>
-      </section>
-
-      <section class="panel stat-card">
-        <p class="stat-label">近期关键词</p>
-        <strong>自动化测试 / 竞赛项目 / 技术沉淀</strong>
-        <span>把项目经历、实习见闻和博客记录整理在同一个站点里</span>
-      </section>
-    </aside>
+    </div>
   </section>
 
-  <section class="home-grid">
-    <section class="panel intro-card home-large-card">
-      <h2>关于我</h2>
-      <p>
-        目前处在硕士阶段，平时主要接触机器人、嵌入式开发和自动化测试相关内容，也会把做过的项目和学习记录慢慢整理下来。
-      </p>
-      <p>
-        这个站点主要用来集中展示项目、竞赛经历、技术博客和阶段性总结，既方便整理，也方便了解最近在做什么。
-      </p>
-    </section>
-
-    <section class="panel">
-      <h2>技术栈</h2>
-      <div class="chip-list">
-        <span v-for="item in profile.techStack" :key="item" class="chip">{{ item }}</span>
+  <section class="profile-band section-wrap">
+    <div class="profile-card panel">
+      <div class="profile-intro">
+        <img :src="profile.avatar" alt="站点头像" class="profile-avatar" />
+        <div class="profile-copy">
+          <h2>你好，我是 {{ profile.nickname }}</h2>
+          <p class="profile-title">{{ profile.title }}</p>
+          <p>{{ profile.summary }}</p>
+          <RouterLink class="outline-button" to="/blog">关于我 <span>→</span></RouterLink>
+        </div>
       </div>
-    </section>
 
-    <section class="panel">
-      <h2>兴趣方向</h2>
-      <div class="chip-list">
-        <span v-for="item in profile.interests" :key="item" class="chip">{{ item }}</span>
+      <div class="ability-list">
+        <article v-for="item in abilities" :key="item.title" class="ability-item">
+          <span class="line-icon" aria-hidden="true">{{ item.icon }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="panel home-timeline">
-      <h2>学习阶段</h2>
-      <div v-for="item in profile.education" :key="item" class="timeline-item">
-        <span>{{ item }}</span>
+  <section class="section-wrap featured-section">
+    <div class="section-heading split-heading">
+      <div>
+        <h2>项目经历</h2>
       </div>
-    </section>
+      <RouterLink class="text-link arrow-link" to="/works" aria-label="查看全部项目">
+        查看全部
+      </RouterLink>
+    </div>
 
-    <section class="panel contact-panel">
-      <h2>联系我</h2>
-      <ul class="contact-list">
-        <li>
-          <strong>GitHub：</strong>
-          <a :href="profile.contacts.github" target="_blank" rel="noreferrer">{{ profile.contacts.github }}</a>
-        </li>
-        <li>
-          <strong>Email：</strong>
-          <span>{{ profile.contacts.email }}</span>
-        </li>
-      </ul>
-    </section>
+    <div class="featured-grid">
+      <RouterLink
+        v-for="work in featuredWorks"
+        :key="work.slug"
+        class="featured-work panel"
+        :to="`/works/${encodeURIComponent(work.slug)}`"
+        :aria-label="`查看项目：${work.title}`"
+      >
+        <img :src="work.cover" :alt="work.title" loading="lazy" />
+        <div>
+          <p class="meta">{{ work.year }}</p>
+          <h3>{{ work.title }} <span>{{ work.status }}</span></h3>
+          <p>{{ work.summary }}</p>
+          <div class="chip-list compact">
+            <span v-for="tech in work.techStack.slice(0, 3)" :key="`${work.slug}-${tech}`" class="chip">
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </RouterLink>
+    </div>
+  </section>
 
-    <section class="panel home-large-card">
-      <h2>经历速览</h2>
-      <div class="timeline-item" v-for="item in profile.experience" :key="item">
-        <span>{{ item }}</span>
-      </div>
-    </section>
-
-    <section class="panel home-large-card">
-      <h2>竞赛与获奖</h2>
-      <div class="chip-list">
-        <span v-for="item in profile.achievements" :key="item" class="chip">{{ item }}</span>
-      </div>
-    </section>
+  <section class="section-wrap insight-section">
+    <article class="quote-card">
+      <span>“</span>
+      <p>代码是工具，思考才是核心。<br />保持学习，保持创造。</p>
+    </article>
+    <a class="button-dark contact-button" :href="`mailto:${profile.contacts.email}`">联系我 <span>📧</span></a>
   </section>
 </template>
 
 <script setup>
 import { RouterLink } from "vue-router";
 import profile from "../content/profile.json";
+import { getAllWorks } from "../lib/works";
+
+const abilities = [
+  { icon: "</>", title: "代码编写", text: "热爱编程，追求优雅与高效" },
+  { icon: "DIY", title: "硬件创客", text: "动手搭建，验证工程想法" },
+  { icon: "?", title: "问题解决", text: "逻辑思考，解决实际问题" },
+  { icon: "[]", title: "持续学习", text: "保持好奇，不断突破自己" },
+];
+
+const featuredWorks = getAllWorks().slice(0, 3);
 </script>
