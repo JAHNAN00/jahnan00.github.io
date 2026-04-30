@@ -2,6 +2,7 @@ import { ref } from "vue";
 
 const STORAGE_KEY = "portal-theme";
 const theme = ref("system");
+const THEME_ORDER = ["system", "light", "dark"];
 
 const getSystemTheme = () =>
   window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -43,8 +44,9 @@ export const useTheme = () => {
   };
 
   const toggleTheme = () => {
-    const current = resolveTheme(theme.value);
-    setTheme(current === "dark" ? "light" : "dark");
+    const currentIndex = THEME_ORDER.indexOf(theme.value);
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % THEME_ORDER.length;
+    setTheme(THEME_ORDER[nextIndex]);
   };
 
   return {

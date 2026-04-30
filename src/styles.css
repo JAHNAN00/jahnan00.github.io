@@ -167,25 +167,24 @@ img {
 }
 
 .theme-switch {
-  border: 0;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-soft);
-  font-size: 13px;
-  font-weight: 600;
 }
 
 .theme-switch-label {
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .theme-switch-track {
-  width: 42px;
-  height: 24px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 92px;
+  min-height: 32px;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 2px;
@@ -193,21 +192,96 @@ img {
 }
 
 .theme-switch-thumb {
-  position: relative;
-  display: flex;
-  width: 18px;
-  height: 18px;
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc((100% - 4px) / 3);
   border-radius: 50%;
-  background: var(--text);
-  transition: transform 0.2s ease;
+  background: var(--bg-strong);
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.theme-switch-track[data-dark="true"] .theme-switch-thumb {
-  transform: translateX(18px);
+.theme-switch-track[data-mode="system"] .theme-switch-thumb {
+  transform: translateX(100%);
+}
+
+.theme-switch-track[data-mode="dark"] .theme-switch-thumb {
+  transform: translateX(200%);
+}
+
+.theme-switch-option {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-soft);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.theme-switch-option[aria-pressed="true"] {
+  color: var(--text);
+}
+
+.theme-switch-option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .theme-switch-icon {
-  display: none;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.theme-switch-icon.light {
+  width: 17px;
+  height: 17px;
+}
+
+.theme-switch-icon.light svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.theme-switch-icon.system {
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  width: 16px;
+  height: 11px;
+}
+
+.theme-switch-icon.system::after {
+  position: absolute;
+  right: 3px;
+  bottom: -5px;
+  left: 3px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.theme-switch-icon.dark {
+  border-radius: 50%;
+  box-shadow: inset 5px -2px 0 0 currentColor;
 }
 
 .home-hero {
