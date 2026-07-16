@@ -864,6 +864,7 @@ input {
 .article-page {
   max-width: 920px;
   margin-top: 42px;
+  min-width: 0;
 }
 
 .article-page h1,
@@ -875,6 +876,7 @@ input {
   margin-top: 28px;
   color: color-mix(in oklab, var(--text) 86%, var(--text-soft));
   font-size: 17px;
+  overflow-wrap: anywhere;
 }
 
 .markdown-body h2,
@@ -903,9 +905,21 @@ input {
 
 .markdown-body img {
   display: block;
+  height: auto;
   max-width: 100%;
   margin: 24px auto;
   border-radius: 18px;
+}
+
+.markdown-body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.markdown-body iframe,
+.markdown-body video {
+  max-width: 100%;
 }
 
 .list,
@@ -1108,6 +1122,14 @@ input {
 
   .search-bar-wrap {
     grid-template-columns: 20px minmax(0, 1fr);
+  }
+
+  .article-page {
+    padding: 24px 20px;
+  }
+
+  .markdown-body {
+    font-size: 16px;
   }
 
   .floating-back-button {
