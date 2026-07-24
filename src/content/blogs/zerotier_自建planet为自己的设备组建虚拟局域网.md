@@ -25,13 +25,13 @@ zerotier是一个基于P2P技术的用于搭建**虚拟局域网**的工具。
 
 ### Windows
 
-在官网下载页（https://www.zerotier.com/download/）下载msi文件并安装。
+在[官网下载页](https://www.zerotier.com/download/)下载 msi 文件并安装。
 
 安装后，默认配置文件位置：`C:\ProgramData\ZeroTier\One`
 
 ### MacOS
 
-在官网下载页（https://www.zerotier.com/download/）下载MacOS PKG Installer并安装。
+在[官网下载页](https://www.zerotier.com/download/)下载 MacOS PKG Installer 并安装。
 
 安装后，默认配置文件位置：`/Library/Application Support/ZeroTier/One`
 
@@ -59,7 +59,7 @@ zerotier-cli join $YOUR_NET_ID
 
 ## 配置网络节点
 
-如果你计划使用官方服务，请在官网（https://www.zerotier.com）注册账号和节点，并在 Member 选项卡中管理你的设备，绑定虚拟IP。绑定好并打洞成功后，可以试着能否Ping通。
+如果你计划使用官方服务，请在[官网](https://www.zerotier.com)注册账号和节点，并在 Member 选项卡中管理你的设备，绑定虚拟 IP。绑定好并打洞成功后，可以试着能否 Ping 通。
 
 ```shell
 ping $YOUR_VIRTUAL_IP
@@ -73,7 +73,7 @@ ping $YOUR_VIRTUAL_IP
 
 ### 在服务器上搭建ztncui
 
-主要参考 https://key-networks.com/ztncui/#installation。
+主要参考 [ztncui 安装文档](https://key-networks.com/ztncui/#installation)。
 
 关键命令如下。
 
@@ -143,7 +143,7 @@ zerotier-idtool initmoon identity.public >> moon.json
 
 编辑 `moon.json` 文件，在 `stableEndpoints` 下配置自己的公网 IP 以及端口，端口使用默认的 `9993` 即可。这样 `moon.json` 就写好了。
 
-在 https://github.com/kaaass/ZeroTierOne/releases 下载可执行文件 `mkmoonworld-x86_64`，然后执行：
+在 [ZeroTierOne Releases](https://github.com/kaaass/ZeroTierOne/releases) 下载可执行文件 `mkmoonworld-x86_64`，然后执行：
 
 ```shell
 cp /var/lib/zerotier-one/moon.json ./

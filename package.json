@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "jahnan00-portal": "link:",
     "markdown-it": "^14.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"

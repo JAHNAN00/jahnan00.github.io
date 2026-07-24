@@ -14,4 +14,7 @@ const githubPagesSpaFallback = () => ({
 
 export default defineConfig({
   plugins: [vue(), githubPagesSpaFallback()],
+  server: {
+    port: 4173,
+  },
 });

@@ -1,13 +1,43 @@
-const modules = import.meta.glob("../content/blogs/*.md", {
+const modules = import.meta.glob("../content/blogs/**/*.md", {
   eager: true,
   import: "default",
   query: "?raw",
 });
 
-const parseScalar = (value) => {
-  const trimmed = value.trim();
+const stripInlineComment = (value) => {
+  let quote = "";
 
-  if (/^\d+$/.test(trimmed)) {
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index];
+
+    if ((character === '"' || character === "'") && value[index - 1] !== "\\") {
+      quote = quote === character ? "" : quote || character;
+    }
+
+    if (!quote && character === "#" && (index === 0 || /\s/.test(value[index - 1]))) {
+      return value.slice(0, index).trimEnd();
+    }
+  }
+
+  return value.trimEnd();
+};
+
+const parseScalar = (value) => {
+  const trimmed = stripInlineComment(value.trim());
+
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1);
+  }
+
+  if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+    const items = trimmed.slice(1, -1).trim();
+    return items ? items.split(",").map((item) => parseScalar(item)) : [];
+  }
+
+  if (/^-?\d+(?:\.\d+)?$/.test(trimmed)) {
     return Number(trimmed);
   }
 
@@ -15,17 +45,12 @@ const parseScalar = (value) => {
 };
 
 const parseFrontMatter = (raw) => {
-  if (!raw.startsWith("---\n")) {
-    return { data: {}, content: raw };
-  }
+  const normalized = raw.replace(/^\uFEFF/, "").replace(/\r\n?/g, "\n");
+  const match = normalized.match(/^---[\t ]*\n([\s\S]*?)\n---[\t ]*(?:\n|$)/);
 
-  const endIndex = raw.indexOf("\n---\n", 4);
+  if (!match) return { data: {}, content: normalized };
 
-  if (endIndex === -1) {
-    return { data: {}, content: raw };
-  }
-
-  const source = raw.slice(4, endIndex).split("\n");
+  const source = match[1].split("\n");
   const data = {};
   let activeKey = null;
 
@@ -34,7 +59,7 @@ const parseFrontMatter = (raw) => {
       continue;
     }
 
-    const listMatch = line.match(/^\s+-\s+(.*)$/);
+    const listMatch = line.match(/^\s*-\s+(.*)$/);
 
     if (listMatch && activeKey) {
       if (!Array.isArray(data[activeKey])) {
@@ -54,18 +79,17 @@ const parseFrontMatter = (raw) => {
     const [, key, rest] = keyValueMatch;
     activeKey = key;
 
-    if (!rest) {
+    if (!rest || !stripInlineComment(rest).trim()) {
       data[key] = [];
       continue;
     }
 
-    const inlineValue = rest.split(" #")[0];
-    data[key] = parseScalar(inlineValue);
+    data[key] = parseScalar(rest);
   }
 
   return {
     data,
-    content: raw.slice(endIndex + 5).trim(),
+    content: normalized.slice(match[0].length).trim(),
   };
 };
 
@@ -75,7 +99,8 @@ const normalizeArray = (value) => {
 };
 
 const parseDate = (date) => {
-  const timestamp = new Date(date || 0).getTime();
+  const normalized = String(date || "").replace(/\//g, "-");
+  const timestamp = new Date(normalized || 0).getTime();
   return Number.isNaN(timestamp) ? 0 : timestamp;
 };
 
@@ -98,12 +123,14 @@ const getExcerpt = (markdown, maxLength = 120) => {
 };
 
 const posts = Object.entries(modules)
+  .filter(([path]) => !path.endsWith("/template.md"))
   .map(([path, raw]) => {
     const { data, content } = parseFrontMatter(raw);
-    const fileName = path.split("/").pop().replace(/\.md$/, "");
+    const slug = path.replace("../content/blogs/", "").replace(/\.md$/, "");
+    const fileName = slug.split("/").pop();
 
     return {
-      slug: fileName,
+      slug,
       title: data.title || fileName,
       date: data.date || "",
       timestamp: parseDate(data.date),
