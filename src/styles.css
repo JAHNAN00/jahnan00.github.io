@@ -857,6 +857,26 @@ input {
   padding: 36px;
 }
 
+.project-links {
+  margin-top: 24px;
+  padding: 28px 36px;
+}
+
+.project-links h2 {
+  margin-bottom: 14px;
+  font-size: 24px;
+}
+
+.project-links .list {
+  margin: 0;
+}
+
+.project-links a {
+  color: var(--text);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
 .detail-head {
   margin-top: 42px;
 }
@@ -1061,6 +1081,26 @@ input {
   max-width: 100%;
   margin: 24px auto;
   border-radius: 18px;
+}
+
+.markdown-body .project-logo {
+  width: min(180px, 100%);
+  margin: 24px auto;
+}
+
+.project-screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 2.5em;
+}
+
+.project-screenshot-grid img {
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--soft-shadow);
 }
 
 .markdown-body table {
@@ -1301,6 +1341,14 @@ input {
 
   .article-page {
     padding: 24px 20px;
+  }
+
+  .project-links {
+    padding: 24px 20px;
+  }
+
+  .project-screenshot-grid {
+    grid-template-columns: 1fr;
   }
 
   .markdown-body {

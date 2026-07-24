@@ -1,4 +1,5 @@
 .DS_Store
 dist
 node_modules
+.temp/
 个人简历_2026.pdf

@@ -19,7 +19,7 @@
     <div class="markdown-body" v-html="rendered"></div>
   </section>
 
-  <section v-if="work && hasLinks" class="panel">
+  <section v-if="work && hasLinks" class="panel project-links">
     <h2>项目链接</h2>
     <ul class="list">
       <li v-if="work.links.demo">

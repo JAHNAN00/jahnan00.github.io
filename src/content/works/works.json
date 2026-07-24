@@ -1,5 +1,18 @@
 [
   {
+    "slug": "zerotierfix-android-client",
+    "title": "ZerotierFix Android 客户端二次开发",
+    "year": "2026",
+    "status": "v1.1.0",
+    "cover": "/zerotierfix-cover.svg",
+    "summary": "在 kaaass 维护的 ZerotierFix 项目基础上 Fork，并调整界面配色、增加 Quick Settings VPN 磁贴。",
+    "techStack": ["Android", "Java", "界面配色", "Quick Settings Tile"],
+    "links": {
+      "demo": "",
+      "repo": "https://github.com/JAHNAN00/ZerotierFix"
+    }
+  },
+  {
     "slug": "robomaster-control-framework",
     "title": "RoboMaster 机器人电控框架与机构设计",
     "year": "2024 - 2026",
